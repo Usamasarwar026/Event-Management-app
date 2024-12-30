@@ -14,7 +14,7 @@ const initialState = {
 export const signUp = createAsyncThunk(
   'auth/signUp',
   async (credentials) => {
-    const response = await axios.post('http://localhost:8000/auth/signup', credentials);
+    const response = await axios.post(`${process.env.REACT_APP_BASE_URL}/auth/signup`, credentials);
     return response.data;
   }
 );
@@ -22,7 +22,7 @@ export const signUp = createAsyncThunk(
 export const login = createAsyncThunk(
   'auth/login',
   async (credentials) => {
-    const response = await axios.post('http://localhost:8000/auth/login', credentials);
+    const response = await axios.post(`${process.env.REACT_APP_BASE_URL}/auth/login`, credentials);
     return response.data;
   }
 );
