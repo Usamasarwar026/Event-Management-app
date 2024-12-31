@@ -12,14 +12,14 @@ const Header = () => {
   };
 
   return (
-    <header className="bg-blue-950 p-4">
-      <nav className="flex  justify-between items-center p-3">
-        <Link to="/" className="text-white text-2xl font-bold">Event Management App</Link>
-        <div className='mr-5 '>
+    <header className="bg-blue-950 lg:p-4">
+      <nav className="flex  justify-between items-center px-2 py-4 lg:p-3 ">
+        <Link to="/" className="text-white text-2xl font-bold">Event Management</Link>
+        <div className='lg:mr-5 '>
           {isAuthenticated ? (
             <>
               <Link to="/create-event" className="text-white mr-4">Create Event</Link>
-              <button onClick={handleLogout} className="text-white border border-white px-6 py-3 rounded-[10px]">Logout</button>
+              <button onClick={handleLogout} className="text-white  border-white px-6 py-3 rounded-[10px]">Logout</button>
             </>
           ) : (
             <>
