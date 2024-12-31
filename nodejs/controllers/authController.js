@@ -6,7 +6,7 @@ const User = require("../models/userModel");
 
 const doSignup =async (req, res) => {
     try {
-        console.log('req.body recieved', req.body);
+        // console.log('req.body recieved', req.body);
         if (!req.body?.password) {
             res.json({
                 data: [],
@@ -15,7 +15,7 @@ const doSignup =async (req, res) => {
             })
         }
         var hash = bcrypt.hashSync(req.body.password, 8);
-        console.log('hash', hash);
+        // console.log('hash', hash);
         let newUser = new User({
             email: req.body?.email,
             password: hash,
@@ -64,13 +64,13 @@ const doLogin = async (req, res) => {
             })
         }
 
-        console.log("userFound", userFound);
+        // console.log("userFound", userFound);
         
         var passwordIsValid = bcrypt.compareSync(
             req.body.password,
             userFound.password
         );
-        console.log("passwordIsValid",passwordIsValid);
+        // console.log("passwordIsValid",passwordIsValid);
         
         if (!passwordIsValid) {
             res.json({
@@ -81,9 +81,9 @@ const doLogin = async (req, res) => {
         }
 
         const secretKey = process.env.SECRET_KEY;
-        console.log('secretKey', secretKey);
+        // console.log('secretKey', secretKey);
         var token = jwt.sign({_id:userFound._id, email:  userFound.email, name:userFound.name }, secretKey);
-        console.log('token', token);
+        // console.log('token', token);
 
         res.json({
             data: {

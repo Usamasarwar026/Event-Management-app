@@ -85,24 +85,7 @@ const updateTodo = async (req, res) => {
     }
 }
 
-// const deleteTodo =  async (req, res) => {
-//     try {
-//         let id = Number(req.params?.id);
-//         let todo = await Todos.findOneAndDelete({ id: id });
-//         res.json({
-//             data: todo,
-//             status: "success"
-//         })
 
-//     } catch (error) {
-//         res.json({
-//             data: [],
-//             status: "error",
-//             error: error
-//         })
-//     }
-// }
-// Assuming you have something like this for your delete route:
 const deleteTodo = async (req, res) => {
     const { id } = req.params;  // 'id' is the MongoDB _id field
 
@@ -118,6 +101,7 @@ const deleteTodo = async (req, res) => {
         res.status(500).json({ status: 'error', message: 'Server error' });
     }
 };
+
 
 
 module.exports = {
