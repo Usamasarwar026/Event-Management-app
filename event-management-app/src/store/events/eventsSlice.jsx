@@ -1,6 +1,8 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
 
+
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
 const initialState = {
     events: [],  // Ensure this is an array
     status: 'idle',
@@ -11,11 +13,11 @@ const initialState = {
 export const fetchEvents = createAsyncThunk('events/fetchEvents', async () => {
   try {
     // Make a GET request to the updated API endpoint
-    const response = await axios.get(`http://localhost:8000/todos/`);
-    console.log('API Response:', response.data); // Log the response to verify the data structure
+    const response = await axios.get(`${API_BASE_URL}todos/`);
+    // console.log('API Response:', response.data); // Log the response to verify the data structure
     return response.data; // Return the data from the API
   } catch (error) {
-    console.error('Error fetching events:', error); // Log any error that occurs
+    // console.error('Error fetching events:', error); // Log any error that occurs
     throw error; // Re-throw the error so Redux can handle it
   }
 });
@@ -24,7 +26,7 @@ export const fetchEvents = createAsyncThunk('events/fetchEvents', async () => {
 export const createEvent = createAsyncThunk(
   'events/createEvent',
   async (eventData) => {
-    const response = await axios.post(`http://localhost:8000/todos/create`, eventData);
+    const response = await axios.post(`${API_BASE_URL}todos/create`, eventData);
     return response.data;
   }
 );
@@ -40,7 +42,7 @@ const eventsSlice = createSlice({
         state.status = 'loading';
       })
       .addCase(fetchEvents.fulfilled, (state, action) => {
-        console.log('Fetched Events:', action.payload);
+        // console.log('Fetched Events:', action.payload);
         state.status = 'succeeded';
         state.events = action.payload;
       })

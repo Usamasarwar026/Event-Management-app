@@ -1,6 +1,10 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
 
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
+
+// console.log('API Base URL:', import.meta.env.VITE_API_BASE_URL);
+
 // Get token from localStorage to maintain state on reload
 const token = localStorage.getItem('token');
 
@@ -15,7 +19,7 @@ export const signUp = createAsyncThunk(
   'auth/signUp',
   async (credentials, { rejectWithValue }) => {
     try {
-      const response = await axios.post(`http://localhost:8000/auth/signup`, credentials);
+      const response = await axios.post(`${API_BASE_URL}auth/signup`, credentials);
       return response.data;
     } catch (error) {
       return rejectWithValue(error.response?.data || error.message);
@@ -26,7 +30,7 @@ export const signUp = createAsyncThunk(
 export const login = createAsyncThunk(
   'auth/login',
   async (credentials) => {
-    const response = await axios.post(`http://localhost:8000/auth/login`, credentials);
+    const response = await axios.post(`${API_BASE_URL}auth/login`, credentials);
     return response.data;
   }
 );

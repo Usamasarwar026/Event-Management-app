@@ -15,7 +15,7 @@ const SignUp = () => {
       await dispatch(signUp({ email, password }));
       navigate('/');
     } catch (error) {
-      console.error('Sign up failed:', error);
+      // console.error('Sign up failed:', error);
     }
   };
 

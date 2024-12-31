@@ -23,7 +23,7 @@ const CreateEvent = () => {
       // Navigate to the home page after event creation
       navigate('/');
     } catch (error) {
-      console.error('Event creation failed:', error);
+      // console.error('Event creation failed:', error);
     }
   };
 
