@@ -11,7 +11,7 @@ const initialState = {
 export const fetchEvents = createAsyncThunk('events/fetchEvents', async () => {
   try {
     // Make a GET request to the updated API endpoint
-    const response = await axios.get(`${process.env.REACT_APP_BASE_URL}/todos/`);
+    const response = await axios.get(`http://localhost:8000/todos/`);
     console.log('API Response:', response.data); // Log the response to verify the data structure
     return response.data; // Return the data from the API
   } catch (error) {
@@ -24,7 +24,7 @@ export const fetchEvents = createAsyncThunk('events/fetchEvents', async () => {
 export const createEvent = createAsyncThunk(
   'events/createEvent',
   async (eventData) => {
-    const response = await axios.post(`${process.env.REACT_APP_BASE_URL}/todos/create`, eventData);
+    const response = await axios.post(`http://localhost:8000/todos/create`, eventData);
     return response.data;
   }
 );

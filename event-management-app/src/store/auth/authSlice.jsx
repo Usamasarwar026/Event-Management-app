@@ -13,16 +13,20 @@ const initialState = {
 
 export const signUp = createAsyncThunk(
   'auth/signUp',
-  async (credentials) => {
-    const response = await axios.post(`${process.env.REACT_APP_BASE_URL}/auth/signup`, credentials);
-    return response.data;
+  async (credentials, { rejectWithValue }) => {
+    try {
+      const response = await axios.post(`http://localhost:8000/auth/signup`, credentials);
+      return response.data;
+    } catch (error) {
+      return rejectWithValue(error.response?.data || error.message);
+    }
   }
 );
 
 export const login = createAsyncThunk(
   'auth/login',
   async (credentials) => {
-    const response = await axios.post(`${process.env.REACT_APP_BASE_URL}/auth/login`, credentials);
+    const response = await axios.post(`http://localhost:8000/auth/login`, credentials);
     return response.data;
   }
 );
@@ -44,9 +48,11 @@ const authSlice = createSlice({
       })
       .addCase(signUp.fulfilled, (state, action) => {
         state.status = 'succeeded';
-        state.user = action.payload.user;
-        state.isAuthenticated = true;
-        localStorage.setItem('token', action.payload.token);
+        state.user = action.payload?.user || null; // Safely access user
+        state.isAuthenticated = !!action.payload?.token;
+        if (action.payload?.token) {
+          localStorage.setItem('token', action.payload.token);
+        }
       })
       .addCase(signUp.rejected, (state, action) => {
         state.status = 'failed';
